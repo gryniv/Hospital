@@ -1,5 +1,13 @@
 package com.hospital;
 
+
+import com.hospital.entities.drugs.Medicament;
+import com.hospital.entities.patients.PatientCounter;
+import com.hospital.entities.patients.PatientGroup;
+import com.hospital.entities.patients.Patients;
+
+import java.util.List;
+
 public class Quarantine {
 
     /**
@@ -7,33 +15,36 @@ public class Quarantine {
      * Please remember that how it's done is as important as the end result.
      */
 
+    final List<Patients> patients;
 
-    public Quarantine(String subjects) {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
-
-    public void aspirin() {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public Quarantine(String patients) {
+        this.patients = PatientGroup.placing(patients);
     }
 
     public void antibiotic() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Medicament.Antibiotic.giveFor(patients);
     }
 
     public void insulin() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Medicament.Insulin.giveFor(patients);
     }
 
     public void paracetamol() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        Medicament.Paracetamol.giveFor(patients);
+    }
+
+    public void aspirin() {
+        Medicament.Aspirin.giveFor(patients);
     }
 
     public void wait40Days() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        int days = 40;
+        patients.forEach(s->s.addTimeInQuarantine(days));
     }
 
     public String report() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        PatientCounter counter = new PatientCounter();
+        counter.count(patients);
+        return counter.report();
     }
-
 }

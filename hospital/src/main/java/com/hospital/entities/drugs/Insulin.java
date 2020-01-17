@@ -1,10 +1,14 @@
 package com.hospital.entities.drugs;
 
-public class Insulin {
+import com.hospital.entities.patients.Patients;
 
-    public static final String name = Medicament.Insulin.toString();
+import java.util.List;
 
-    public static String getName() {
-        return name;
+public class Insulin implements Drug {
+
+    public void applyMedicament(Medicament medicament, List<Patients> patients) {
+        for (Patients patient : patients) {
+            patient.applyMedicament(medicament);
+        }
     }
 }
