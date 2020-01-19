@@ -1,12 +1,13 @@
 package com.hospital;
 
 
-import com.hospital.entities.drugs.Medicament;
 import com.hospital.entities.patients.PatientCounter;
 import com.hospital.entities.patients.PatientGroup;
 import com.hospital.entities.patients.Patients;
 
 import java.util.List;
+
+import static com.hospital.entities.drugs.Medicament.*;
 
 public class Quarantine {
 
@@ -22,24 +23,23 @@ public class Quarantine {
     }
 
     public void antibiotic() {
-        Medicament.Antibiotic.giveFor(patients);
+        Antibiotic.giveFor(patients);
     }
 
     public void insulin() {
-        Medicament.Insulin.giveFor(patients);
+        Insulin.giveFor(patients);
     }
 
     public void paracetamol() {
-        Medicament.Paracetamol.giveFor(patients);
+        Paracetamol.giveFor(patients);
     }
 
     public void aspirin() {
-        Medicament.Aspirin.giveFor(patients);
+        Aspirin.giveFor(patients);
     }
 
     public void wait40Days() {
-        int days = 40;
-        patients.forEach(s->s.addTimeInQuarantine(days));
+        patients.forEach(s -> s.addTimeInQuarantine(40));
     }
 
     public String report() {

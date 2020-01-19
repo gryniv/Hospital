@@ -7,6 +7,9 @@ import com.hospital.entities.patients.Patients;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.hospital.entities.drugs.Medicament.Aspirin;
+import static com.hospital.entities.drugs.Medicament.Paracetamol;
+
 public abstract class HealthState {
     protected final List<Medicament> medicament;
     protected int days;
@@ -25,7 +28,7 @@ public abstract class HealthState {
     }
 
     protected void checkParacetamolPlusAspirin(Patients patient) {
-        if (medicament.contains(Medicament.Aspirin) && medicament.contains(Medicament.Paracetamol)) {
+        if (medicament.contains(Aspirin) && medicament.contains(Paracetamol)) {
             patient.setHealthState(new Dead());
         }
     }

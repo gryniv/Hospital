@@ -1,11 +1,14 @@
 package com.hospital.entities.patients;
 
 
-import com.hospital.entities.patients.status.HealthCondition;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.hospital.entities.patients.status.HealthCondition.Tuberculosis;
+import static com.hospital.entities.patients.status.HealthCondition.Healthy;
+import static com.hospital.entities.patients.status.HealthCondition.Diabetes;
+import static com.hospital.entities.patients.status.HealthCondition.Fever;
 
 
 public class PatientGroup {
@@ -19,13 +22,13 @@ public class PatientGroup {
     private static Patients checkPatientsGroups(String input) {
         switch (input.toCharArray()[0]) {
             case 'F':
-                return HealthCondition.Fever.addPatient();
+                return Fever.addPatient();
             case 'D':
-                return HealthCondition.Diabetes.addPatient();
+                return Diabetes.addPatient();
             case 'T':
-                return HealthCondition.Tuberculosis.addPatient();
+                return Tuberculosis.addPatient();
             default:
-                return HealthCondition.Healthy.addPatient();
+                return Healthy.addPatient();
         }
     }
 }
