@@ -6,12 +6,12 @@ import com.hospital.entities.patients.status.HealthState;
 
 public class Patients {
 
-    private HealthState healthState;
     private final String name;
+    private HealthState healthState;
 
     public Patients(HealthState healthState) {
         this.healthState = healthState;
-        this.name  = healthState.getClass().getSimpleName();
+        this.name = healthState.getClass().getSimpleName();
     }
 
     public HealthState getHealthState() {
@@ -31,7 +31,8 @@ public class Patients {
         healthState.applyMedicament(medicament);
         healthState.changeState(this);
     }
-    public String getName(){
-       return name;
+
+    public String getName() {
+        return name;
     }
 }

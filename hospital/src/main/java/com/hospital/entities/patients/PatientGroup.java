@@ -24,7 +24,7 @@ public class PatientGroup {
 
     public static List<Patients> placing(String input) {
         List<Patients> patients = new ArrayList<>();
-        Arrays.stream(input.split(COMMA)).forEach(s -> patients.add(checkPatientsGroups(s)) );
+        Arrays.stream(input.split(COMMA)).forEach(s -> patients.add(checkPatientsGroups(s)));
         return patients;
     }
 

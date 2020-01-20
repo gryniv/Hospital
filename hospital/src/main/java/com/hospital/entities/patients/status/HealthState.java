@@ -14,16 +14,15 @@ import static com.hospital.entities.drugs.Medicament.PARACETAMOL;
 
 public abstract class HealthState {
 
-    public List<Medicament> getMedicament() {
-        return medicament;
-    }
-
     protected final List<Medicament> medicament;
     protected int days;
-
     public HealthState() {
         medicament = new ArrayList<>();
         days = 0;
+    }
+
+    public List<Medicament> getMedicament() {
+        return medicament;
     }
 
     public void applyMedicament(Medicament medicament) {

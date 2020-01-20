@@ -10,7 +10,7 @@ public class Fever extends HealthState {
 
     @Override
     public void changeState(Patients patient) {
-        if(days>=40 && (medicament.contains(PARACETAMOL) || medicament.contains(ASPIRIN))){
+        if (days >= 40 && (medicament.contains(PARACETAMOL) || medicament.contains(ASPIRIN))) {
             patient.setHealthState(new Healthy());
         }
         checkParacetamolPlusAspirin(patient);
