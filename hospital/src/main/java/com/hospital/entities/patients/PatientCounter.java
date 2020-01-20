@@ -1,7 +1,11 @@
 package com.hospital.entities.patients;
 
 
-import com.hospital.entities.patients.status.*;
+import com.hospital.entities.patients.status.Tuberculosis;
+import com.hospital.entities.patients.status.Diabetes;
+import com.hospital.entities.patients.status.Healthy;
+import com.hospital.entities.patients.status.Dead;
+import com.hospital.entities.patients.status.Fever;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -14,12 +18,12 @@ import static com.hospital.entities.patients.status.HealthCondition.*;
 public class PatientCounter {
 
     private static final Logger LOG = LogManager.getLogger(PatientCounter.class);
-    private static final String fever = FEVER.condition;
-    private static final String healthy = HEALTHY.condition;
-    private static final String diabetes = DIABETES.condition;
-    private static final String tuberculosis = TUBERCULOSIS.condition;
-    private static final String died = DIED.condition;
     private static final Map<String, Integer> HEALTH_COUNTER = new LinkedHashMap<>();
+    private static final String tuberculosis = TUBERCULOSIS.condition;
+    private static final String diabetes = DIABETES.condition;
+    private static final String healthy = HEALTHY.condition;
+    private static final String fever = FEVER.condition;
+    private static final String died = DIED.condition;
     private static final String SPACE = " ";
     private static final String COLON = ":";
 
@@ -31,7 +35,7 @@ public class PatientCounter {
         HEALTH_COUNTER.put(died, 0);
     }
 
-    public void count(List<Patients> patients) {
+    public String count(List<Patients> patients) {
         LOG.info("++++ Hospital gives for all patients medication:");
         for (Patients patient : patients) {
             if (patient.getHealthState() instanceof Fever) {
@@ -52,6 +56,7 @@ public class PatientCounter {
             }
         }
         LOG.info("Done. Result is " + report() + "\n");
+        return report();
     }
 
     public String report() {

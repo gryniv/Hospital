@@ -1,7 +1,11 @@
 package com.hospital;
 
 
-import com.hospital.entities.drugs.*;
+import com.hospital.entities.drugs.Drugs;
+import com.hospital.entities.drugs.Paracetamol;
+import com.hospital.entities.drugs.Antibiotic;
+import com.hospital.entities.drugs.Aspirin;
+import com.hospital.entities.drugs.Insulin;
 import com.hospital.entities.patients.PatientCounter;
 import com.hospital.entities.patients.PatientGroup;
 import com.hospital.entities.patients.Patients;
@@ -16,13 +20,19 @@ public class Quarantine {
      */
 
     final List<Patients> patients;
-    final static Drugs aspirin = new Aspirin();
-    final static Drugs antibiotic = new Antibiotic();
-    final static Drugs insulin = new Insulin();
     final static Drugs paracetamol = new Paracetamol();
+    final static Drugs antibiotic = new Antibiotic();
+    final static Drugs aspirin = new Aspirin();
+    final static Drugs insulin = new Insulin();
+    private static PatientCounter counter;
 
     public Quarantine(String patients) {
         this.patients = PatientGroup.placing(patients);
+        counter = new PatientCounter();
+    }
+
+    public void aspirin() {
+        aspirin.giveFor(patients);
     }
 
     public void antibiotic() {
@@ -37,17 +47,11 @@ public class Quarantine {
         paracetamol.giveFor(patients);
     }
 
-    public void aspirin() {
-        aspirin.giveFor(patients);
-    }
-
     public void wait40Days() {
         patients.forEach(s -> s.addTimeInQuarantine(40));
     }
 
     public String report() {
-        PatientCounter counter = new PatientCounter();
-        counter.count(patients);
-        return counter.report();
+        return counter.count(patients);
     }
 }
