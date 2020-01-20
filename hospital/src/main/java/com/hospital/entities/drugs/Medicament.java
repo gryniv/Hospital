@@ -6,28 +6,28 @@ import java.util.List;
 
 public enum Medicament {
 
-    Aspirin {
+    ASPIRIN {
         @Override
         public List<Patients> giveFor(List<Patients> patients) {
-            patients.forEach(s->s.applyMedicament(Aspirin));
+            patients.forEach(s->s.applyMedicament(ASPIRIN));
             return patients;
         }
-    }, Insulin {
+    }, INSULIN {
         @Override
         public List<Patients> giveFor(List<Patients> patients) {
-            patients.forEach(s->s.applyMedicament(Insulin));
+            patients.forEach(s->s.applyMedicament(INSULIN));
             return patients;
         }
-    }, Antibiotic {
+    }, ANTIBIOTIC {
         @Override
         public List<Patients> giveFor(List<Patients> patients) {
-            patients.forEach(s->s.applyMedicament(Antibiotic));
+            patients.forEach(s->s.applyMedicament(ANTIBIOTIC));
             return patients;
         }
-    }, Paracetamol {
+    }, PARACETAMOL {
         @Override
         public List<Patients> giveFor(List<Patients> patients) {
-            patients.forEach(s->s.applyMedicament(Paracetamol));
+            patients.forEach(s->s.applyMedicament(PARACETAMOL));
             return patients;
         }
     };
