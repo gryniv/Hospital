@@ -23,19 +23,19 @@ public class Quarantine {
     }
 
     public void antibiotic() {
-        Antibiotic.giveFor(patients);
+        ANTIBIOTIC.giveFor(patients);
     }
 
     public void insulin() {
-        Insulin.giveFor(patients);
+        INSULIN.giveFor(patients);
     }
 
     public void paracetamol() {
-        Paracetamol.giveFor(patients);
+        PARACETAMOL.giveFor(patients);
     }
 
     public void aspirin() {
-        Aspirin.giveFor(patients);
+        ASPIRIN.giveFor(patients);
     }
 
     public void wait40Days() {

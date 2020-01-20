@@ -4,15 +4,18 @@
 
     <modelVersion>4.0.0</modelVersion>
 
+    <name>Ihor Hryniv</name>
     <groupId>com.hospital</groupId>
-    <artifactId>Ihor Hryniv</artifactId>
+    <artifactId>IhorHryniv</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <modules>
         <module>hospital</module>
     </modules>
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>4.11</junit.version>
         <commons-lang>2.6</commons-lang>
         <maven-compiler-plugin>3.1</maven-compiler-plugin>
