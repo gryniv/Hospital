@@ -14,7 +14,10 @@ import static com.hospital.entities.drugs.Medicament.PARACETAMOL;
 
 public abstract class HealthState {
 
-    private static final Logger LOG = LogManager.getLogger(HealthState.class);
+    public List<Medicament> getMedicament() {
+        return medicament;
+    }
+
     protected final List<Medicament> medicament;
     protected int days;
 
@@ -33,7 +36,6 @@ public abstract class HealthState {
 
     protected void checkParacetamolPlusAspirin(Patients patient) {
         if (medicament.contains(ASPIRIN) && medicament.contains(PARACETAMOL)) {
-            LOG.info("You take for patient Aspirin and Paracetamol.");
             patient.setHealthState(new Dead());
         }
     }

@@ -7,8 +7,6 @@ import com.hospital.entities.patients.Patients;
 
 import java.util.List;
 
-import static com.hospital.entities.drugs.Medicament.*;
-
 public class Quarantine {
 
     /**
