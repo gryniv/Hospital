@@ -32,23 +32,25 @@ public class PatientCounter {
     }
 
     public void count(List<Patients> patients) {
+        LOG.info( "++++ Hospital gives for all patients medication:");
         for (Patients patient : patients) {
             if (patient.getHealthState() instanceof Fever){
-                LOG.info(patient + " now - is Fever.");
+                LOG.info(patient.getName() + " patient now - is ill Fever.");
                 HEALTH_COUNTER.replace(fever, HEALTH_COUNTER.get(fever) + 1);}
             else if (patient.getHealthState() instanceof Healthy){
-                LOG.info(patient + " now - is Healthy.");
+                LOG.info(patient.getName() + " patient now - is Healthy.");
                 HEALTH_COUNTER.replace(healthy, HEALTH_COUNTER.get(healthy) + 1);}
             else if (patient.getHealthState() instanceof Diabetes){
-                LOG.info(patient + " now - is Diabetes.");
+                LOG.info(patient.getName() + " patient now - is ill Diabetes.");
                 HEALTH_COUNTER.replace(diabetes, HEALTH_COUNTER.get(diabetes) + 1);}
             else if (patient.getHealthState() instanceof Tuberculosis){
-                LOG.info(patient + " now - is Tuberculosis.");
+                LOG.info(patient.getName() + " patient now - is ill Tuberculosis.");
                 HEALTH_COUNTER.replace(tuberculosis, HEALTH_COUNTER.get(tuberculosis) + 1);}
             else if (patient.getHealthState() instanceof Dead){
-                LOG.info(patient + " now - is Died.");
+                LOG.info(patient.getName() + " patient now - is Died.");
                 HEALTH_COUNTER.replace(died, HEALTH_COUNTER.get(died) + 1);}
         }
+        LOG.info("Done. Result is " + report() +"\n");
     }
 
     public String report() {
