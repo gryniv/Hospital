@@ -10,12 +10,14 @@ import java.util.List;
 public class Patient {
 
     private int days;
+    private String name;
     private List<Drug> drugs;
     private HealthCondition healthCondition;
 
     public Patient(HealthCondition healthCondition) {
         this.drugs = new ArrayList<>();
         this.healthCondition = healthCondition;
+        this.name = healthCondition.name();
     }
 
     public HealthCondition getHealthCondition() {
@@ -41,7 +43,8 @@ public class Patient {
     public List<Drug> getDrugs() {
         return drugs;
     }
-    public void setDrugs(final List<Drug> drugs) {
-        this.drugs = drugs;
+
+    public String getName() {
+        return name;
     }
 }

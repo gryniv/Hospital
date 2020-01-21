@@ -19,8 +19,8 @@ public class PatientCalculator {
             result.put(value.getCondition(), 0);
         }
         patientList.forEach(p -> result.computeIfPresent(p.getHealthCondition().getCondition(), (k, v) -> ++v));
-        StringJoiner sj = new StringJoiner(SPACE);
-        result.forEach((key, value) -> sj.add(key + COLON + value));
-        return sj.toString();
+        StringJoiner stringJoiner = new StringJoiner(SPACE);
+        result.forEach((key, value) -> stringJoiner.add(key + COLON + value));
+        return stringJoiner.toString();
     }
 }
