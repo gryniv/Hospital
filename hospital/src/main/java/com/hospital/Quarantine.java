@@ -1,15 +1,16 @@
 package com.hospital;
 
 
-import com.hospital.entities.patients.drugs.Drugs;
-import com.hospital.entities.patients.drugs.Paracetamol;
-import com.hospital.entities.patients.drugs.Antibiotic;
-import com.hospital.entities.patients.drugs.Aspirin;
-import com.hospital.entities.patients.drugs.Insulin;
-import com.hospital.entities.patients.patients.PatientGroup;
-import com.hospital.entities.patients.patients.Patient;
+import com.hospital.entities.drugs.*;
+import com.hospital.factory.StateFactory;
+import com.hospital.factory.PatientFactory;
+import com.hospital.entities.patients.Patient;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.hospital.constant.QuarantineConstants.COMMA;
 
 public class Quarantine {
 
@@ -18,39 +19,39 @@ public class Quarantine {
      * Please remember that how it's done is as important as the end result.
      */
 
-    final List<Patient> patients;
-    final static Drugs paracetamol = new Paracetamol();
-    final static Drugs antibiotic = new Antibiotic();
-    final static Drugs aspirin = new Aspirin();
-    final static Drugs insulin = new Insulin();
-    private static PatientCounter counter;
+    final List<Patient> patientList = new ArrayList<>();
+
 
     public Quarantine(String patients) {
-        this.patients = PatientGroup.placing(patients);
-        counter = new PatientCounter();
+        parsePatients(patients);
+    }
+
+    private void parsePatients(final String patients) {
+        Arrays.stream(patients.split(COMMA)).forEach(s -> patientList.add(PatientFactory.getPatient(s)));
     }
 
     public void aspirin() {
-        aspirin.giveFor(patients);
+        patientList.forEach(p -> p.getDrugs().add(Drug.ASPIRIN));
     }
 
     public void antibiotic() {
-        antibiotic.giveFor(patients);
+        patientList.forEach(p -> p.getDrugs().add(Drug.ANTIBIOTIC));
     }
 
     public void insulin() {
-        insulin.giveFor(patients);
+        patientList.forEach(p -> p.getDrugs().add(Drug.INSULIN));
     }
 
     public void paracetamol() {
-        paracetamol.giveFor(patients);
+        patientList.forEach(p -> p.getDrugs().add(Drug.PARACETAMOL));
     }
 
     public void wait40Days() {
-        patients.forEach(s -> s.addTimeInQuarantine(40));
+        patientList.forEach(s -> s.setDays(40));
     }
 
     public String report() {
-        return counter.count(patients);
+        patientList.forEach(p -> StateFactory.getStrategy(p.getHealthCondition().getCondition()).useDrugs(p));
+        return new PatientCalculator().calculate(patientList);
     }
 }

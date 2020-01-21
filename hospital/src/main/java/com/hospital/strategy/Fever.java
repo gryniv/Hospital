@@ -1,19 +1,25 @@
 package com.hospital.strategy;
 
 
-import com.hospital.entities.patients.patients.Patient;
+import com.hospital.entities.drugs.Drug;
+import com.hospital.entities.patients.Patient;
+import com.hospital.entities.patients.status.HealthCondition;
 
-import static com.hospital.entities.patients.drugs.Medicament.ASPIRIN;
-import static com.hospital.entities.patients.drugs.Medicament.PARACETAMOL;
+import java.util.List;
 
-public class Fever extends HealthState {
+import static com.hospital.entities.drugs.Drug.ASPIRIN;
+import static com.hospital.entities.drugs.Drug.PARACETAMOL;
+
+public class Fever implements StateStrategy {
 
     @Override
-    public void changeState(Patient patient) {
-        if (days >= 40 && (medicament.contains(PARACETAMOL) || medicament.contains(ASPIRIN))) {
-            patient.setHealthState(new Healthy());
-        } else if (medicament.contains(ASPIRIN) && medicament.contains(PARACETAMOL)) {
-            patient.setHealthState(new Dead());
+    public void useDrugs(Patient patient) {
+        final int days = patient.getDays();
+        final List<Drug> drugs = patient.getDrugs();
+        if (days >= 40 && (drugs.contains(PARACETAMOL) || drugs.contains(ASPIRIN))) {
+            patient.setHealthCondition(HealthCondition.HEALTHY);
+        } else if (drugs.contains(ASPIRIN) && drugs.contains(PARACETAMOL)) {
+            patient.setHealthCondition(HealthCondition.DIED);
         }
     }
 
