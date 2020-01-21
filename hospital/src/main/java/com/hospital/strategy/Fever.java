@@ -1,25 +1,25 @@
 package com.hospital.strategy;
 
 
-import com.hospital.entities.drugs.Drug;
-import com.hospital.entities.patients.Patient;
-import com.hospital.entities.patients.status.HealthCondition;
-import com.hospital.factory.StateFactory;
+import com.hospital.entity.Drug;
+import com.hospital.entity.Patient;
+import com.hospital.entity.HealthCondition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-import static com.hospital.entities.drugs.Drug.ASPIRIN;
-import static com.hospital.entities.drugs.Drug.PARACETAMOL;
+import static com.hospital.constant.QuarantineConstants.FORTY_DAYS;
+import static com.hospital.entity.Drug.ASPIRIN;
+import static com.hospital.entity.Drug.PARACETAMOL;
 
 public class Fever implements StateStrategy {
-    private final static Logger LOG = LogManager.getLogger(StateFactory.class);
+    private final static Logger LOG = LogManager.getLogger(Fever.class);
     @Override
     public void useDrugs(Patient patient) {
         final int days = patient.getDays();
         final List<Drug> drugs = patient.getDrugs();
-        if (days >= 40 && (drugs.contains(PARACETAMOL) || drugs.contains(ASPIRIN))) {
+        if (days >= FORTY_DAYS && (drugs.contains(PARACETAMOL) || drugs.contains(ASPIRIN))) {
             LOG.info("[+] {} patient now - is Healthy.", patient.getName());
             patient.setHealthCondition(HealthCondition.HEALTHY);
         } else if (drugs.contains(ASPIRIN) && drugs.contains(PARACETAMOL)) {

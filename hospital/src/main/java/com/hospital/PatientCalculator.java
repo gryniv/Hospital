@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.StringJoiner;
 
-import com.hospital.entities.patients.Patient;
-import com.hospital.entities.patients.status.HealthCondition;
+import com.hospital.entity.Patient;
+import com.hospital.entity.HealthCondition;
 
 import static com.hospital.constant.QuarantineConstants.COLON;
 import static com.hospital.constant.QuarantineConstants.SPACE;

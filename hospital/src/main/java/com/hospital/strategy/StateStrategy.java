@@ -1,7 +1,7 @@
 package com.hospital.strategy;
 
 
-import com.hospital.entities.patients.Patient;
+import com.hospital.entity.Patient;
 
 public interface StateStrategy {
 

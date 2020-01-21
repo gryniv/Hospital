@@ -1,13 +1,13 @@
 package com.hospital.factory;
 
 
-import com.hospital.entities.patients.Patient;
+import com.hospital.entity.Patient;
 import com.hospital.exception.UnknownHealthConditionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.hospital.constant.QuarantineConstants.*;
-import static com.hospital.entities.patients.status.HealthCondition.*;
+import static com.hospital.entity.HealthCondition.*;
 
 
 public class PatientFactory {
@@ -17,7 +17,7 @@ public class PatientFactory {
     private PatientFactory() {
     }
 
-    public static Patient getPatient(String patientCondition) {
+    public static Patient getPatient(String patientCondition) throws UnknownHealthConditionException {
         switch (patientCondition) {
             case F:
                 LOG.info("New Fever patient is come.");

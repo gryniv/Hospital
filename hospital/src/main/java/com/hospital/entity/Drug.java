@@ -1,4 +1,4 @@
-package com.hospital.entities.drugs;
+package com.hospital.entity;
 
 
 public enum Drug {

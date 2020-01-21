@@ -1,4 +1,4 @@
-package com.hospital.entities.patients.status;
+package com.hospital.entity;
 
 
 import static com.hospital.constant.QuarantineConstants.D;

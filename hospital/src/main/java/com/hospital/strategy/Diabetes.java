@@ -1,28 +1,28 @@
 package com.hospital.strategy;
 
 
-import com.hospital.entities.drugs.Drug;
-import com.hospital.entities.patients.Patient;
-import com.hospital.entities.patients.status.HealthCondition;
-import com.hospital.factory.StateFactory;
+import com.hospital.entity.Drug;
+import com.hospital.entity.Patient;
+import com.hospital.entity.HealthCondition;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-import static com.hospital.entities.drugs.Drug.INSULIN;
-import static com.hospital.entities.drugs.Drug.ASPIRIN;
-import static com.hospital.entities.drugs.Drug.PARACETAMOL;
+import static com.hospital.constant.QuarantineConstants.FORTY_DAYS;
+import static com.hospital.entity.Drug.INSULIN;
+import static com.hospital.entity.Drug.ASPIRIN;
+import static com.hospital.entity.Drug.PARACETAMOL;
 
 public class Diabetes implements StateStrategy {
 
-    private final static Logger LOG = LogManager.getLogger(StateFactory.class);
+    private final static Logger LOG = LogManager.getLogger(Diabetes.class);
 
     @Override
     public void useDrugs(Patient patient) {
         final int days = patient.getDays();
         final List<Drug> drugs = patient.getDrugs();
-        if ((days >= 40 && !drugs.contains(INSULIN)) || (drugs.contains(ASPIRIN) && drugs.contains(PARACETAMOL))) {
+        if ((days >= FORTY_DAYS && !drugs.contains(INSULIN)) || (drugs.contains(ASPIRIN) && drugs.contains(PARACETAMOL))) {
             LOG.info("[X] {} patient now - is Died.", patient.getName());
             patient.setHealthState(HealthCondition.DIED);
         } else {

@@ -3,6 +3,7 @@ package com.hospital;
 import static org.junit.Assert.assertEquals;
 
 import com.hospital.exception.UnknownHealthConditionException;
+import com.hospital.factory.StateFactory;
 import org.junit.Test;
 
 public class QuarantineTest {
@@ -103,6 +104,12 @@ public class QuarantineTest {
 
     @Test(expected = UnknownHealthConditionException.class)
     public void shouldShowErrorWhenComesIncorrectPatients() throws UnknownHealthConditionException {
+        Quarantine quarantine = new Quarantine("F,H,X,Z,D,H,X");
+    }
+
+    @Test(expected = UnknownHealthConditionException.class)
+    public void asd() throws UnknownHealthConditionException {
+        StateFactory stateFactory = new StateFactory();
         Quarantine quarantine = new Quarantine("F,H,X,Z,D,H,X");
     }
 

@@ -8,13 +8,20 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="ru.javastudy.examples.User" level="debug" additivity="true">
+        <Logger name="ru.javas.examples.User" level="debug" additivity="true">
             <AppenderRef ref="Console"/>
         </Logger>
 
         <!-- Root Logger -->
-        <Root level="all">
-            <AppenderRef ref="Console"/>
+        <Logger name="EventLogger" level="info" additivity="false">
+            <AppenderRef ref="Routing"/>
+        </Logger>
+        <Logger name="status">
+            <AppenderRef ref="status"/>
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="STDOUT"/>
         </Root>
     </Loggers>
 

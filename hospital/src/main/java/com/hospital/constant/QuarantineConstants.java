@@ -9,6 +9,7 @@ public class QuarantineConstants {
     public static final String COMMA = ",";
     public static final String COLON = ":";
     public static final String SPACE = " ";
+    public static final int FORTY_DAYS = 40;
 
     private QuarantineConstants() {
     }

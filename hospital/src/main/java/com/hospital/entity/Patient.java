@@ -1,8 +1,5 @@
-package com.hospital.entities.patients;
+package com.hospital.entity;
 
-
-import com.hospital.entities.drugs.Drug;
-import com.hospital.entities.patients.status.HealthCondition;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,16 +1,19 @@
 package com.hospital;
 
 
-import com.hospital.entities.drugs.*;
+import com.hospital.entity.Drug;
 import com.hospital.factory.StateFactory;
 import com.hospital.factory.PatientFactory;
-import com.hospital.entities.patients.Patient;
+import com.hospital.entity.Patient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static com.hospital.constant.QuarantineConstants.COMMA;
+import static com.hospital.constant.QuarantineConstants.FORTY_DAYS;
 
 public class Quarantine {
 
@@ -20,6 +23,7 @@ public class Quarantine {
      */
 
     final List<Patient> patientList = new ArrayList<>();
+    private final static Logger LOG = LogManager.getLogger(Quarantine.class);
 
 
     public Quarantine(String patients) {
@@ -28,6 +32,7 @@ public class Quarantine {
 
     private void parsePatients(final String patients) {
         Arrays.stream(patients.split(COMMA)).forEach(s -> patientList.add(PatientFactory.getPatient(s)));
+        LOG.info("Patients come into Hospital {} \n", new PatientCalculator().calculate(patientList));
     }
 
     public void aspirin() {
@@ -47,11 +52,13 @@ public class Quarantine {
     }
 
     public void wait40Days() {
-        patientList.forEach(s -> s.setDays(40));
+        patientList.forEach(s -> s.setDays(FORTY_DAYS));
     }
 
     public String report() {
         patientList.forEach(p -> StateFactory.getStrategy(p.getHealthCondition().getCondition()).useDrugs(p));
-        return new PatientCalculator().calculate(patientList);
+        String afterHealing = new PatientCalculator().calculate(patientList);
+        LOG.info("Patients after Healing {} \n", afterHealing);
+        return afterHealing;
     }
 }
