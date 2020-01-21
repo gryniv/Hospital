@@ -2,14 +2,12 @@ package com.hospital.factory;
 
 
 import com.hospital.entities.patients.Patient;
+import com.hospital.exception.UnknownHealthConditionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import static com.hospital.constant.QuarantineConstants.*;
-import static com.hospital.entities.patients.status.HealthCondition.TUBERCULOSIS;
-import static com.hospital.entities.patients.status.HealthCondition.HEALTHY;
-import static com.hospital.entities.patients.status.HealthCondition.DIABETES;
-import static com.hospital.entities.patients.status.HealthCondition.FEVER;
+import static com.hospital.entities.patients.status.HealthCondition.*;
 
 
 public class PatientFactory {
@@ -30,9 +28,15 @@ public class PatientFactory {
             case T:
                 LOG.info("New Tuberculosis patient is come.");
                 return new Patient(TUBERCULOSIS);
-            default:
-                LOG.info("New Healthy patient is come.");
+            case H:
+                LOG.info("New health patient is come.");
                 return new Patient(HEALTHY);
+            case X:
+                LOG.error("New patient arrived already dead.");
+                throw new UnknownHealthConditionException();
+            default:
+                LOG.error("Patient with unknown health condition is come.");
+                throw new UnknownHealthConditionException();
         }
     }
 }

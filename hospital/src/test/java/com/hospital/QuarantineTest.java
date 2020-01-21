@@ -2,6 +2,7 @@ package com.hospital;
 
 import static org.junit.Assert.assertEquals;
 
+import com.hospital.exception.UnknownHealthConditionException;
 import org.junit.Test;
 
 public class QuarantineTest {
@@ -32,13 +33,13 @@ public class QuarantineTest {
      */
 
     @Test
-    public void withoutTreatmentNorTime() throws Exception {
+    public void withoutTreatmentNorTime() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,T");
         assertEquals("F:1 H:1 D:1 T:1 X:0", quarantine.report());
     }
 
     @Test
-    public void withoutTreatment() throws Exception {
+    public void withoutTreatment() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,T");
         quarantine.wait40Days();
         // diabetics die without insulin
@@ -46,7 +47,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void aspirin() throws Exception {
+    public void aspirin() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,F,F,H,D,T");
         quarantine.aspirin();
         quarantine.wait40Days();
@@ -55,7 +56,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void antibiotic() throws Exception {
+    public void antibiotic() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,H,T");
         quarantine.antibiotic();
         quarantine.wait40Days();
@@ -64,7 +65,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void insulin() throws Exception {
+    public void insulin() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,H,T");
         quarantine.insulin();
         quarantine.wait40Days();
@@ -73,7 +74,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void antibioticPlusInsulin() throws Exception {
+    public void antibioticPlusInsulin() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,H,T");
         quarantine.antibiotic();
         quarantine.insulin();
@@ -83,7 +84,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void paracetamol() throws Exception {
+    public void paracetamol() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,F,H,D,D,D,H,T");
         quarantine.paracetamol();
         quarantine.wait40Days();
@@ -92,12 +93,17 @@ public class QuarantineTest {
     }
 
     @Test
-    public void paracetamolAndAspirin() throws Exception {
+    public void paracetamolAndAspirin() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,H,T");
         quarantine.paracetamol();
         quarantine.aspirin();
         // mixing paracetamol & aspirin INSTANTLY kills subject !
         assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
+    }
+
+    @Test(expected = UnknownHealthConditionException.class)
+    public void shouldShowErrorWhenComesIncorrectPatients() throws UnknownHealthConditionException {
+        Quarantine quarantine = new Quarantine("F,H,X,Z,D,H,X");
     }
 
 

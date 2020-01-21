@@ -28,8 +28,6 @@ public class StateFactory {
                 return new Tuberculosis();
             case H:
                 return new Healthy();
-            case X:
-                return new Dead();
             default:
                 LOG.error("Patient with unknown health condition is come.");
                 throw new UnknownHealthConditionException();
