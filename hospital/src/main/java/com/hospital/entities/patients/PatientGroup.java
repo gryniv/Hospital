@@ -16,15 +16,17 @@ import static com.hospital.entities.patients.status.HealthCondition.FEVER;
 
 public class PatientGroup {
 
-    private static final Logger LOG = LogManager.getLogger(PatientGroup.class);
-    private static final String COMMA = ",";
+    private final static Logger LOG = LogManager.getLogger(PatientGroup.class);
+    private final static String COMMA = ",";
 
     private PatientGroup() {
     }
 
     public static List<Patients> placing(String input) {
+        System.out.println(input);
         List<Patients> patients = new ArrayList<>();
         Arrays.stream(input.split(COMMA)).forEach(s -> patients.add(checkPatientsGroups(s)));
+        System.out.println(patients);
         return patients;
     }
 

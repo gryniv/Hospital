@@ -1,11 +1,7 @@
 package com.hospital.entities.patients;
 
 
-import com.hospital.entities.patients.status.Tuberculosis;
-import com.hospital.entities.patients.status.Diabetes;
-import com.hospital.entities.patients.status.Healthy;
-import com.hospital.entities.patients.status.Dead;
-import com.hospital.entities.patients.status.Fever;
+import com.hospital.entities.patients.status.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,49 +9,48 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.hospital.entities.patients.status.HealthCondition.*;
 
 public class PatientCounter {
 
-    private static final Logger LOG = LogManager.getLogger(PatientCounter.class);
-    private static final Map<String, Integer> HEALTH_COUNTER = new LinkedHashMap<>();
-    private static final String tuberculosis = TUBERCULOSIS.condition;
-    private static final String diabetes = DIABETES.condition;
-    private static final String healthy = HEALTHY.condition;
-    private static final String fever = FEVER.condition;
-    private static final String died = DIED.condition;
-    private static final String SPACE = " ";
-    private static final String COLON = ":";
+    private final static Logger LOG = LogManager.getLogger(PatientCounter.class);
+    private final static Map<String, Integer> HEALTH_COUNTER = new LinkedHashMap<>();
+    private final static String TUBERCULOSIS = HealthCondition.TUBERCULOSIS.getCondition();
+    private final static String DIABETES = HealthCondition.DIABETES.getCondition();
+    private final static String HEALTHY = HealthCondition.HEALTHY.getCondition();
+    private final static String FEVER = HealthCondition.FEVER.getCondition();
+    private final static String DIED = HealthCondition.DIED.getCondition();
+    private final static String SPACE = " ";
+    private final static String COLON = ":";
 
     public PatientCounter() {
-        HEALTH_COUNTER.put(fever, 0);
-        HEALTH_COUNTER.put(healthy, 0);
-        HEALTH_COUNTER.put(diabetes, 0);
-        HEALTH_COUNTER.put(tuberculosis, 0);
-        HEALTH_COUNTER.put(died, 0);
+        HEALTH_COUNTER.put(FEVER, 0);
+        HEALTH_COUNTER.put(HEALTHY, 0);
+        HEALTH_COUNTER.put(DIABETES, 0);
+        HEALTH_COUNTER.put(TUBERCULOSIS, 0);
+        HEALTH_COUNTER.put(DIED, 0);
     }
 
     public String count(List<Patients> patients) {
         LOG.info("++++ Hospital gives for all patients medication:");
         for (Patients patient : patients) {
             if (patient.getHealthState() instanceof Fever) {
-                LOG.info(patient.getName() + " patient now - is ill Fever.");
-                HEALTH_COUNTER.replace(fever, HEALTH_COUNTER.get(fever) + 1);
+                LOG.info("{} patient now - is ill Fever.", patient.getName());
+                HEALTH_COUNTER.replace(FEVER, HEALTH_COUNTER.get(FEVER) + 1);
             } else if (patient.getHealthState() instanceof Healthy) {
-                LOG.info(patient.getName() + " patient now - is Healthy.");
-                HEALTH_COUNTER.replace(healthy, HEALTH_COUNTER.get(healthy) + 1);
+                LOG.info("{} patient now - is Healthy.", patient.getName());
+                HEALTH_COUNTER.replace(HEALTHY, HEALTH_COUNTER.get(HEALTHY) + 1);
             } else if (patient.getHealthState() instanceof Diabetes) {
-                LOG.info(patient.getName() + " patient now - is ill Diabetes.");
-                HEALTH_COUNTER.replace(diabetes, HEALTH_COUNTER.get(diabetes) + 1);
+                LOG.info("{} patient now - is ill Diabetes.", patient.getName());
+                HEALTH_COUNTER.replace(DIABETES, HEALTH_COUNTER.get(DIABETES) + 1);
             } else if (patient.getHealthState() instanceof Tuberculosis) {
-                LOG.info(patient.getName() + " patient now - is ill Tuberculosis.");
-                HEALTH_COUNTER.replace(tuberculosis, HEALTH_COUNTER.get(tuberculosis) + 1);
+                LOG.info("{} patient now - is ill Tuberculosis.", patient.getName());
+                HEALTH_COUNTER.replace(TUBERCULOSIS, HEALTH_COUNTER.get(TUBERCULOSIS) + 1);
             } else if (patient.getHealthState() instanceof Dead) {
-                LOG.info(patient.getName() + " patient now - is Died.");
-                HEALTH_COUNTER.replace(died, HEALTH_COUNTER.get(died) + 1);
+                LOG.info("{} patient now - is Died.", patient.getName());
+                HEALTH_COUNTER.replace(DIED, HEALTH_COUNTER.get(DIED) + 1);
             }
         }
-        LOG.info("Done. Result is " + report() + "\n");
+        LOG.info("Done. Result is {} \n", report());
         return report();
     }
 
