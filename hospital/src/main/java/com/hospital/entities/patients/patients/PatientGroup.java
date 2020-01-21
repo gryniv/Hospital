@@ -1,4 +1,4 @@
-package com.hospital.entities.patients;
+package com.hospital.entities.patients.patients;
 
 
 import org.apache.logging.log4j.LogManager;
@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.hospital.entities.patients.status.HealthCondition.TUBERCULOSIS;
-import static com.hospital.entities.patients.status.HealthCondition.HEALTHY;
-import static com.hospital.entities.patients.status.HealthCondition.DIABETES;
-import static com.hospital.entities.patients.status.HealthCondition.FEVER;
+import static com.hospital.entities.patients.patients.status.HealthCondition.TUBERCULOSIS;
+import static com.hospital.entities.patients.patients.status.HealthCondition.HEALTHY;
+import static com.hospital.entities.patients.patients.status.HealthCondition.DIABETES;
+import static com.hospital.entities.patients.patients.status.HealthCondition.FEVER;
 
 
 public class PatientGroup {
@@ -22,15 +22,15 @@ public class PatientGroup {
     private PatientGroup() {
     }
 
-    public static List<Patients> placing(String input) {
+    public static List<Patient> placing(String input) {
         System.out.println(input);
-        List<Patients> patients = new ArrayList<>();
+        List<Patient> patients = new ArrayList<>();
         Arrays.stream(input.split(COMMA)).forEach(s -> patients.add(checkPatientsGroups(s)));
         System.out.println(patients);
         return patients;
     }
 
-    private static Patients checkPatientsGroups(String input) {
+    private static Patient checkPatientsGroups(String input) {
         switch (input.toCharArray()[0]) {
             case 'F':
                 LOG.info("New Fever patient is come.");

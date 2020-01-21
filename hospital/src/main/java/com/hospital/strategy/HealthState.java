@@ -1,8 +1,8 @@
-package com.hospital.entities.patients.status;
+package com.hospital.strategy;
 
 
-import com.hospital.entities.drugs.Medicament;
-import com.hospital.entities.patients.Patients;
+import com.hospital.entities.patients.drugs.Medicament;
+import com.hospital.entities.patients.patients.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,5 +30,5 @@ public abstract class HealthState {
         this.days += days;
     }
 
-    public abstract void changeState(Patients patient);
+    public abstract void changeState(Patient patient);
 }

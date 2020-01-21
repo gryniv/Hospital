@@ -1,14 +1,13 @@
 package com.hospital;
 
 
-import com.hospital.entities.drugs.Drugs;
-import com.hospital.entities.drugs.Paracetamol;
-import com.hospital.entities.drugs.Antibiotic;
-import com.hospital.entities.drugs.Aspirin;
-import com.hospital.entities.drugs.Insulin;
-import com.hospital.entities.patients.PatientCounter;
-import com.hospital.entities.patients.PatientGroup;
-import com.hospital.entities.patients.Patients;
+import com.hospital.entities.patients.drugs.Drugs;
+import com.hospital.entities.patients.drugs.Paracetamol;
+import com.hospital.entities.patients.drugs.Antibiotic;
+import com.hospital.entities.patients.drugs.Aspirin;
+import com.hospital.entities.patients.drugs.Insulin;
+import com.hospital.entities.patients.patients.PatientGroup;
+import com.hospital.entities.patients.patients.Patient;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public class Quarantine {
      * Please remember that how it's done is as important as the end result.
      */
 
-    final List<Patients> patients;
+    final List<Patient> patients;
     final static Drugs paracetamol = new Paracetamol();
     final static Drugs antibiotic = new Antibiotic();
     final static Drugs aspirin = new Aspirin();

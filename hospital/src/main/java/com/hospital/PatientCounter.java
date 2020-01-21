@@ -1,7 +1,9 @@
-package com.hospital.entities.patients;
+package com.hospital;
 
 
-import com.hospital.entities.patients.status.*;
+import com.hospital.entities.patients.patients.Patient;
+import com.hospital.entities.patients.patients.status.*;
+import com.hospital.strategy.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -30,9 +32,9 @@ public class PatientCounter {
         HEALTH_COUNTER.put(DIED, 0);
     }
 
-    public String count(List<Patients> patients) {
+    public String count(List<Patient> patients) {
         LOG.info("++++ Hospital gives for all patients medication:");
-        for (Patients patient : patients) {
+        for (Patient patient : patients) {
             if (patient.getHealthState() instanceof Fever) {
                 LOG.info("{} patient now - is ill Fever.", patient.getName());
                 HEALTH_COUNTER.replace(FEVER, HEALTH_COUNTER.get(FEVER) + 1);

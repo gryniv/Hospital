@@ -1,15 +1,15 @@
-package com.hospital.entities.patients;
+package com.hospital.entities.patients.patients;
 
 
-import com.hospital.entities.drugs.Medicament;
-import com.hospital.entities.patients.status.HealthState;
+import com.hospital.entities.patients.drugs.Medicament;
+import com.hospital.strategy.HealthState;
 
-public class Patients {
+public class Patient {
 
     private final String name;
     private HealthState healthState;
 
-    public Patients(HealthState healthState) {
+    public Patient(HealthState healthState) {
         this.healthState = healthState;
         this.name = healthState.getClass().getSimpleName();
     }
