@@ -9,32 +9,40 @@ public enum HealthCondition {
         public Patients addPatient() {
             return new Patients(new Healthy());
         }
-    }, FEVER("F") {
+    },
+    FEVER("F") {
         @Override
         public Patients addPatient() {
             return new Patients(new Fever());
         }
-    }, DIABETES("D") {
+    },
+    DIABETES("D") {
         @Override
         public Patients addPatient() {
             return new Patients(new Diabetes());
         }
-    }, TUBERCULOSIS("T") {
+    },
+    TUBERCULOSIS("T") {
         @Override
         public Patients addPatient() {
             return new Patients(new Tuberculosis());
         }
-    }, DIED("X") {
+    },
+    DIED("X") {
         @Override
         public Patients addPatient() {
             return new Patients(new Dead());
         }
     };
 
-    public String condition;
+    private String condition;
 
     HealthCondition(String condition) {
         this.condition = condition;
+    }
+
+    public String getCondition() {
+        return condition;
     }
 
     public abstract Patients addPatient();

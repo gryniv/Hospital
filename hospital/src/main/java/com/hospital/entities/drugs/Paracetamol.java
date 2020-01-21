@@ -8,9 +8,6 @@ import static com.hospital.entities.drugs.Medicament.PARACETAMOL;
 
 public class Paracetamol implements Drugs {
 
-    public Paracetamol() {
-
-    }
 
     @Override
     public List<Patients> giveFor(List<Patients> patients) {

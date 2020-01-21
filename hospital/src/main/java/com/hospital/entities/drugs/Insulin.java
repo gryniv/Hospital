@@ -8,9 +8,6 @@ import static com.hospital.entities.drugs.Medicament.INSULIN;
 
 public class Insulin implements Drugs {
 
-    public Insulin() {
-
-    }
 
     @Override
     public List<Patients> giveFor(List<Patients> patients) {
