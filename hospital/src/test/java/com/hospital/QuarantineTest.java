@@ -1,8 +1,8 @@
 package com.hospital;
 
 import com.hospital.entity.Patient;
+import com.hospital.exception.UnexpectedHealthCondition;
 import com.hospital.exception.UnknownHealthConditionException;
-import com.hospital.factory.PatientFactory;
 import com.hospital.factory.StateFactory;
 import org.junit.Assert;
 import org.junit.Rule;
@@ -123,12 +123,11 @@ public class QuarantineTest {
         thrown.expect(UnknownHealthConditionException.class);
         thrown.expectMessage("Patient with unknown health condition is come.");
         Quarantine quarantine = new Quarantine("Z,H,D,D,D,H,T");
-        assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
     }
 
     @Test
     public void shouldShowErrorWhenComesDeadPatients()  {
-        thrown.expect(UnknownHealthConditionException.class);
+        thrown.expect(UnexpectedHealthCondition.class);
         thrown.expectMessage("New patient arrived already dead.");
         Quarantine quarantine = new Quarantine("X,H,D,D,D,H,T");
         assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
@@ -140,14 +139,4 @@ public class QuarantineTest {
         Assert.assertNotNull(patient.getName());
     }
 
-    @Test
-    public void shouldBeNotNullPatientFactory ()  {
-        PatientFactory patientFactory = new PatientFactory();
-        assertNotNull(patientFactory);
-    }
-    @Test
-    public void shouldBeNotNullStateFactory()  {
-        StateFactory stateFactory = new StateFactory();
-        assertNotNull(stateFactory);
-    }
 }

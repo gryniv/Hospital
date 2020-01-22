@@ -15,7 +15,7 @@ import static com.hospital.entity.Drug.ANTIBIOTIC;
 import static com.hospital.entity.Drug.ASPIRIN;
 
 public class Tuberculosis implements StateStrategy {
-    private final static Logger LOG = LogManager.getLogger(Tuberculosis.class);
+    private static final Logger LOG = LogManager.getLogger(Tuberculosis.class);
 
     @Override
     public void useDrugs(Patient patient) {

@@ -16,7 +16,7 @@ import static com.hospital.entity.Drug.PARACETAMOL;
 
 public class Diabetes implements StateStrategy {
 
-    private final static Logger LOG = LogManager.getLogger(Diabetes.class);
+    private static final Logger LOG = LogManager.getLogger(Diabetes.class);
 
     @Override
     public void useDrugs(Patient patient) {

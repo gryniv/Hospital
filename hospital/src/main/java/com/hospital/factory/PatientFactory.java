@@ -2,6 +2,7 @@ package com.hospital.factory;
 
 
 import com.hospital.entity.Patient;
+import com.hospital.exception.UnexpectedHealthCondition;
 import com.hospital.exception.UnknownHealthConditionException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,12 +13,12 @@ import static com.hospital.entity.HealthCondition.*;
 
 public class PatientFactory {
 
-    private final static Logger LOG = LogManager.getLogger(PatientFactory.class);
+    private static final Logger LOG = LogManager.getLogger(PatientFactory.class);
 
-    public PatientFactory() {
+    private PatientFactory() {
     }
 
-    public static Patient getPatient(String patientCondition) throws UnknownHealthConditionException {
+    public static Patient getPatient(String patientCondition) {
         switch (patientCondition) {
             case F:
                 LOG.info("New Fever patient is come.");
@@ -32,7 +33,7 @@ public class PatientFactory {
                 LOG.info("New health patient is come.");
                 return new Patient(HEALTHY);
             case X:
-                throw new UnknownHealthConditionException("New patient arrived already dead.");
+                throw new UnexpectedHealthCondition("New patient arrived already dead.");
             default:
                 throw new UnknownHealthConditionException("Patient with unknown health condition is come.");
         }

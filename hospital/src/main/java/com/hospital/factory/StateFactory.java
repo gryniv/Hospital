@@ -10,7 +10,7 @@ import static com.hospital.constant.QuarantineConstants.H;
 
 public class StateFactory {
 
-    public StateFactory() {
+    private StateFactory() {
 
     }
 
