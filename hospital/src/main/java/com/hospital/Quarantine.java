@@ -32,16 +32,16 @@ public class Quarantine {
 
     private void parsePatients(final String patients) {
         Arrays.stream(patients.split(COMMA)).forEach(s -> patientList.add(PatientFactory.getPatient(s)));
-        LOG.info("Patients come into Hospital {} \n", new PatientCalculator().calculate(patientList));
+        LOG.info("Patients come into Hospital {} \n", calculate());
     }
 
     private void useDrugs() {
         patientList.forEach(p -> StateFactory.getStrategy(p.getHealthCondition().getCondition()).useDrugs(p));
+        LOG.info("Patients after Healing {} \n", calculate());
     }
 
     private String calculate() {
         String afterHealing = new PatientCalculator().calculate(patientList);
-        LOG.info("Patients after Healing {} \n", afterHealing);
         return afterHealing;
     }
 
