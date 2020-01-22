@@ -1,6 +1,7 @@
 package com.hospital;
 
 import com.hospital.entity.Patient;
+import com.hospital.exception.UnexpectedHealthCondition;
 import com.hospital.exception.UnknownHealthConditionException;
 import com.hospital.factory.StateFactory;
 import org.junit.Assert;
@@ -120,7 +121,7 @@ public class QuarantineTest {
 
     @Test
     public void shouldShowErrorWhenComesDeadPatients()  {
-        Throwable exception = assertThrows(UnknownHealthConditionException.class, () -> new Quarantine("X,H,D,D,D,H,T"));
+        Throwable exception = assertThrows(UnexpectedHealthCondition.class, () -> new Quarantine("X,H,D,D,D,H,T"));
         assertEquals("New patient arrived already dead.", exception.getMessage());
     }
 
