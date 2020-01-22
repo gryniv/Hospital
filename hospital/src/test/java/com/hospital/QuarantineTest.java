@@ -1,21 +1,16 @@
 package com.hospital;
 
 import com.hospital.entity.Patient;
-import com.hospital.exception.UnexpectedHealthCondition;
 import com.hospital.exception.UnknownHealthConditionException;
 import com.hospital.factory.StateFactory;
 import org.junit.Assert;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import static com.hospital.entity.HealthCondition.DIABETES;
 import static org.junit.Assert.*;
 
 public class QuarantineTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     /**
      *
@@ -111,25 +106,22 @@ public class QuarantineTest {
     }
 
     @Test
-    public void stateFactoryUnsupportedPatients() throws NullPointerException {
-        thrown.expect(UnknownHealthConditionException.class);
-        thrown.expectMessage("Patient with unknown health condition is come.");
-        StateFactory.getStrategy("Z,Z,X");
+    public void stateFactoryUnsupportedPatients()  {
+        Throwable exception = assertThrows(UnknownHealthConditionException.class, () -> StateFactory.getStrategy("Z,Z,X"));
+        assertEquals("Patient with unknown health condition is come.", exception.getMessage());
     }
 
 
     @Test
     public void shouldShowErrorWhenComesIncorrectPatients()  {
-        thrown.expect(UnknownHealthConditionException.class);
-        thrown.expectMessage("Patient with unknown health condition is come.");
-       new Quarantine("Z,H,D,D,D,H,T");
+        Throwable exception = assertThrows(UnknownHealthConditionException.class, () -> new Quarantine("Z,H,D,D,D,H,T"));
+        assertEquals("Patient with unknown health condition is come.", exception.getMessage());
     }
 
     @Test
     public void shouldShowErrorWhenComesDeadPatients()  {
-        thrown.expect(UnexpectedHealthCondition.class);
-        thrown.expectMessage("New patient arrived already dead.");
-        new Quarantine("X,H,D,D,D,H,T");
+        Throwable exception = assertThrows(UnknownHealthConditionException.class, () -> new Quarantine("X,H,D,D,D,H,T"));
+        assertEquals("New patient arrived already dead.", exception.getMessage());
     }
 
     @Test
