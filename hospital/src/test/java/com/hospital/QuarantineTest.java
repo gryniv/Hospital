@@ -122,15 +122,14 @@ public class QuarantineTest {
     public void shouldShowErrorWhenComesIncorrectPatients()  {
         thrown.expect(UnknownHealthConditionException.class);
         thrown.expectMessage("Patient with unknown health condition is come.");
-        Quarantine quarantine = new Quarantine("Z,H,D,D,D,H,T");
+       new Quarantine("Z,H,D,D,D,H,T");
     }
 
     @Test
     public void shouldShowErrorWhenComesDeadPatients()  {
         thrown.expect(UnexpectedHealthCondition.class);
         thrown.expectMessage("New patient arrived already dead.");
-        Quarantine quarantine = new Quarantine("X,H,D,D,D,H,T");
-        assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
+        new Quarantine("X,H,D,D,D,H,T");
     }
 
     @Test
