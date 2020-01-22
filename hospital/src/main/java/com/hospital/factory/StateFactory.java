@@ -3,16 +3,12 @@ package com.hospital.factory;
 
 import com.hospital.exception.UnknownHealthConditionException;
 import com.hospital.strategy.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import static com.hospital.constant.QuarantineConstants.*;
 import static com.hospital.constant.QuarantineConstants.H;
 
 
 public class StateFactory {
-
-    private final static Logger LOG = LogManager.getLogger(StateFactory.class);
 
     public StateFactory() {
 
@@ -29,8 +25,7 @@ public class StateFactory {
             case H:
                 return new Healthy();
             default:
-                LOG.error("Patient with unknown health condition is come.");
-                throw new UnknownHealthConditionException();
+                throw new UnknownHealthConditionException("Patient with unknown health condition is come.");
         }
     }
 

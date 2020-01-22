@@ -13,15 +13,9 @@
         </Logger>
 
         <!-- Root Logger -->
-        <Logger name="EventLogger" level="info" additivity="false">
-            <AppenderRef ref="Routing"/>
-        </Logger>
-        <Logger name="status">
-            <AppenderRef ref="status"/>
-        </Logger>
 
-        <Root level="error">
-            <AppenderRef ref="STDOUT"/>
+        <Root level="all">
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 

@@ -17,13 +17,13 @@ import static com.hospital.constant.QuarantineConstants.FORTY_DAYS;
 
 public class Quarantine {
 
+    private final static Logger LOG = LogManager.getLogger(Quarantine.class);
     /**
      * To perform this exercise, you will use a readable, maintainable & pragmatic coding style.
      * Please remember that how it's done is as important as the end result.
      */
 
     final List<Patient> patientList = new ArrayList<>();
-    private final static Logger LOG = LogManager.getLogger(Quarantine.class);
 
 
     public Quarantine(String patients) {
@@ -33,6 +33,16 @@ public class Quarantine {
     private void parsePatients(final String patients) {
         Arrays.stream(patients.split(COMMA)).forEach(s -> patientList.add(PatientFactory.getPatient(s)));
         LOG.info("Patients come into Hospital {} \n", new PatientCalculator().calculate(patientList));
+    }
+
+    private void useDrugs() {
+        patientList.forEach(p -> StateFactory.getStrategy(p.getHealthCondition().getCondition()).useDrugs(p));
+    }
+
+    private String calculate() {
+        String afterHealing = new PatientCalculator().calculate(patientList);
+        LOG.info("Patients after Healing {} \n", afterHealing);
+        return afterHealing;
     }
 
     public void aspirin() {
@@ -56,9 +66,7 @@ public class Quarantine {
     }
 
     public String report() {
-        patientList.forEach(p -> StateFactory.getStrategy(p.getHealthCondition().getCondition()).useDrugs(p));
-        String afterHealing = new PatientCalculator().calculate(patientList);
-        LOG.info("Patients after Healing {} \n", afterHealing);
-        return afterHealing;
+        useDrugs();
+        return calculate();
     }
 }

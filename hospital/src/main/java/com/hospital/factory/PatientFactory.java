@@ -14,7 +14,7 @@ public class PatientFactory {
 
     private final static Logger LOG = LogManager.getLogger(PatientFactory.class);
 
-    private PatientFactory() {
+    public PatientFactory() {
     }
 
     public static Patient getPatient(String patientCondition) throws UnknownHealthConditionException {
@@ -32,11 +32,9 @@ public class PatientFactory {
                 LOG.info("New health patient is come.");
                 return new Patient(HEALTHY);
             case X:
-                LOG.error("New patient arrived already dead.");
-                throw new UnknownHealthConditionException();
+                throw new UnknownHealthConditionException("New patient arrived already dead.");
             default:
-                LOG.error("Patient with unknown health condition is come.");
-                throw new UnknownHealthConditionException();
+                throw new UnknownHealthConditionException("Patient with unknown health condition is come.");
         }
     }
 }
