@@ -1,11 +1,21 @@
 package com.hospital;
 
-import static org.junit.Assert.assertEquals;
-
+import com.hospital.entity.Patient;
+import com.hospital.exception.UnknownHealthConditionException;
+import com.hospital.factory.PatientFactory;
+import com.hospital.factory.StateFactory;
+import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import static com.hospital.entity.HealthCondition.DIABETES;
+import static org.junit.Assert.*;
 
 public class QuarantineTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     /**
      *
@@ -32,13 +42,13 @@ public class QuarantineTest {
      */
 
     @Test
-    public void withoutTreatmentNorTime() throws Exception {
+    public void withoutTreatmentNorTime() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,T");
         assertEquals("F:1 H:1 D:1 T:1 X:0", quarantine.report());
     }
 
     @Test
-    public void withoutTreatment() throws Exception {
+    public void withoutTreatment() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,T");
         quarantine.wait40Days();
         // diabetics die without insulin
@@ -46,7 +56,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void aspirin() throws Exception {
+    public void aspirin() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,F,F,H,D,T");
         quarantine.aspirin();
         quarantine.wait40Days();
@@ -55,7 +65,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void antibiotic() throws Exception {
+    public void antibiotic() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,H,T");
         quarantine.antibiotic();
         quarantine.wait40Days();
@@ -64,7 +74,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void insulin() throws Exception {
+    public void insulin() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,H,T");
         quarantine.insulin();
         quarantine.wait40Days();
@@ -73,7 +83,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void antibioticPlusInsulin() throws Exception {
+    public void antibioticPlusInsulin() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,H,T");
         quarantine.antibiotic();
         quarantine.insulin();
@@ -83,7 +93,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void paracetamol() throws Exception {
+    public void paracetamol() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,F,H,D,D,D,H,T");
         quarantine.paracetamol();
         quarantine.wait40Days();
@@ -92,7 +102,7 @@ public class QuarantineTest {
     }
 
     @Test
-    public void paracetamolAndAspirin() throws Exception {
+    public void paracetamolAndAspirin() throws UnknownHealthConditionException {
         Quarantine quarantine = new Quarantine("F,H,D,D,D,H,T");
         quarantine.paracetamol();
         quarantine.aspirin();
@@ -100,5 +110,44 @@ public class QuarantineTest {
         assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
     }
 
+    @Test
+    public void stateFactoryUnsupportedPatients() throws NullPointerException {
+        thrown.expect(UnknownHealthConditionException.class);
+        thrown.expectMessage("Patient with unknown health condition is come.");
+        StateFactory.getStrategy("Z,Z,X");
+    }
 
+
+    @Test
+    public void shouldShowErrorWhenComesIncorrectPatients()  {
+        thrown.expect(UnknownHealthConditionException.class);
+        thrown.expectMessage("Patient with unknown health condition is come.");
+        Quarantine quarantine = new Quarantine("Z,H,D,D,D,H,T");
+        assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
+    }
+
+    @Test
+    public void shouldShowErrorWhenComesDeadPatients()  {
+        thrown.expect(UnknownHealthConditionException.class);
+        thrown.expectMessage("New patient arrived already dead.");
+        Quarantine quarantine = new Quarantine("X,H,D,D,D,H,T");
+        assertEquals("F:0 H:0 D:0 T:0 X:7", quarantine.report());
+    }
+
+    @Test
+    public void nameShouldBeNotNullPointerException()  {
+        Patient patient = new Patient(DIABETES);
+        Assert.assertNotNull(patient.getName());
+    }
+
+    @Test
+    public void shouldBeNotNullPatientFactory ()  {
+        PatientFactory patientFactory = new PatientFactory();
+        assertNotNull(patientFactory);
+    }
+    @Test
+    public void shouldBeNotNullStateFactory()  {
+        StateFactory stateFactory = new StateFactory();
+        assertNotNull(stateFactory);
+    }
 }

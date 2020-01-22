@@ -1,57 +1,72 @@
 package com.hospital;
 
 
-import com.hospital.entities.drugs.Drugs;
-import com.hospital.entities.drugs.Paracetamol;
-import com.hospital.entities.drugs.Antibiotic;
-import com.hospital.entities.drugs.Aspirin;
-import com.hospital.entities.drugs.Insulin;
-import com.hospital.entities.patients.PatientCounter;
-import com.hospital.entities.patients.PatientGroup;
-import com.hospital.entities.patients.Patients;
+import com.hospital.entity.Drug;
+import com.hospital.factory.StateFactory;
+import com.hospital.factory.PatientFactory;
+import com.hospital.entity.Patient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import static com.hospital.constant.QuarantineConstants.COMMA;
+import static com.hospital.constant.QuarantineConstants.FORTY_DAYS;
 
 public class Quarantine {
 
+    private final static Logger LOG = LogManager.getLogger(Quarantine.class);
     /**
      * To perform this exercise, you will use a readable, maintainable & pragmatic coding style.
      * Please remember that how it's done is as important as the end result.
      */
 
-    final List<Patients> patients;
-    final static Drugs paracetamol = new Paracetamol();
-    final static Drugs antibiotic = new Antibiotic();
-    final static Drugs aspirin = new Aspirin();
-    final static Drugs insulin = new Insulin();
-    private static PatientCounter counter;
+    final List<Patient> patientList = new ArrayList<>();
+
 
     public Quarantine(String patients) {
-        this.patients = PatientGroup.placing(patients);
-        counter = new PatientCounter();
+        parsePatients(patients);
+    }
+
+    private void parsePatients(final String patients) {
+        Arrays.stream(patients.split(COMMA)).forEach(s -> patientList.add(PatientFactory.getPatient(s)));
+        LOG.info("Patients come into Hospital {} \n", calculate());
+    }
+
+    private void useDrugs() {
+        patientList.forEach(p -> StateFactory.getStrategy(p.getHealthCondition().getCondition()).useDrugs(p));
+        LOG.info("Patients after Healing {} \n", calculate());
+    }
+
+    private String calculate() {
+        String afterHealing = new PatientCalculator().calculate(patientList);
+        return afterHealing;
     }
 
     public void aspirin() {
-        aspirin.giveFor(patients);
+        patientList.forEach(p -> p.getDrugs().add(Drug.ASPIRIN));
     }
 
     public void antibiotic() {
-        antibiotic.giveFor(patients);
+        patientList.forEach(p -> p.getDrugs().add(Drug.ANTIBIOTIC));
     }
 
     public void insulin() {
-        insulin.giveFor(patients);
+        patientList.forEach(p -> p.getDrugs().add(Drug.INSULIN));
     }
 
     public void paracetamol() {
-        paracetamol.giveFor(patients);
+        patientList.forEach(p -> p.getDrugs().add(Drug.PARACETAMOL));
     }
 
     public void wait40Days() {
-        patients.forEach(s -> s.addTimeInQuarantine(40));
+        patientList.forEach(s -> s.setDays(FORTY_DAYS));
     }
 
     public String report() {
-        return counter.count(patients);
+        useDrugs();
+        return calculate();
     }
 }
