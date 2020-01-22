@@ -16,7 +16,7 @@ import static com.hospital.entity.Drug.INSULIN;
 import static com.hospital.entity.Drug.ASPIRIN;
 
 public class Healthy implements StateStrategy {
-    private final static Logger LOG = LogManager.getLogger(Healthy.class);
+    private static final Logger LOG = LogManager.getLogger(Healthy.class);
     @Override
     public void useDrugs(Patient patient) {
         final int days = patient.getDays();

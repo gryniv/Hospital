@@ -14,7 +14,7 @@ import static com.hospital.entity.Drug.ASPIRIN;
 import static com.hospital.entity.Drug.PARACETAMOL;
 
 public class Fever implements StateStrategy {
-    private final static Logger LOG = LogManager.getLogger(Fever.class);
+    private static final Logger LOG = LogManager.getLogger(Fever.class);
     @Override
     public void useDrugs(Patient patient) {
         final int days = patient.getDays();

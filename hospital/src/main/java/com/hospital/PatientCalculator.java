@@ -14,13 +14,13 @@ import static com.hospital.constant.QuarantineConstants.SPACE;
 public class PatientCalculator {
 
     public String calculate(List<Patient> patientList) {
-        Map<String, Integer> result = new LinkedHashMap<>();
+        Map<String, Integer> conditionMap = new LinkedHashMap<>();
         for (HealthCondition value : HealthCondition.values()) {
-            result.put(value.getCondition(), 0);
+            conditionMap.put(value.getCondition(), 0);
         }
-        patientList.forEach(p -> result.computeIfPresent(p.getHealthCondition().getCondition(), (k, v) -> ++v));
-        StringJoiner stringJoiner = new StringJoiner(SPACE);
-        result.forEach((key, value) -> stringJoiner.add(key + COLON + value));
-        return stringJoiner.toString();
+        patientList.forEach(p -> conditionMap.computeIfPresent(p.getHealthCondition().getCondition(), (k, v) -> ++v));
+        StringJoiner result = new StringJoiner(SPACE);
+        conditionMap.forEach((key, value) -> result.add(key + COLON + value));
+        return result.toString();
     }
 }
