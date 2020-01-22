@@ -1,6 +1,5 @@
 package com.hospital;
 
-
 import com.hospital.entity.Drug;
 import com.hospital.factory.StateFactory;
 import com.hospital.factory.PatientFactory;
@@ -15,16 +14,13 @@ import java.util.List;
 import static com.hospital.constant.QuarantineConstants.COMMA;
 import static com.hospital.constant.QuarantineConstants.FORTY_DAYS;
 
+/**
+ * To perform this exercise, you will use a readable, maintainable & pragmatic coding style.
+ * Please remember that how it's done is as important as the end result.
+ */
 public class Quarantine {
-
     private static final Logger LOG = LogManager.getLogger(Quarantine.class);
-    /**
-     * To perform this exercise, you will use a readable, maintainable & pragmatic coding style.
-     * Please remember that how it's done is as important as the end result.
-     */
-
     final List<Patient> patientList = new ArrayList<>();
-
 
     public Quarantine(String patients) {
         parsePatients(patients);

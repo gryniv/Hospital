@@ -1,11 +1,9 @@
 package com.hospital.entity;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Patient {
-
     private int days;
     private String name;
     private List<Drug> drugs;

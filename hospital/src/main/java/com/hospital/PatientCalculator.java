@@ -12,7 +12,6 @@ import static com.hospital.constant.QuarantineConstants.COLON;
 import static com.hospital.constant.QuarantineConstants.SPACE;
 
 public class PatientCalculator {
-
     public String calculate(List<Patient> patientList) {
         Map<String, Integer> conditionMap = new LinkedHashMap<>();
         for (HealthCondition value : HealthCondition.values()) {

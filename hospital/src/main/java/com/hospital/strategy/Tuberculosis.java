@@ -1,6 +1,5 @@
 package com.hospital.strategy;
 
-
 import com.hospital.entity.Drug;
 import com.hospital.entity.Patient;
 import com.hospital.entity.HealthCondition;
@@ -31,5 +30,4 @@ public class Tuberculosis implements StateStrategy {
             LOG.info("[-] {} patient is still sick", patient.getName());
         }
     }
-
 }

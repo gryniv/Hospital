@@ -1,6 +1,5 @@
 package com.hospital.strategy;
 
-
 import com.hospital.entity.Drug;
 import com.hospital.entity.Patient;
 import com.hospital.entity.HealthCondition;
@@ -15,6 +14,7 @@ import static com.hospital.entity.Drug.PARACETAMOL;
 
 public class Fever implements StateStrategy {
     private static final Logger LOG = LogManager.getLogger(Fever.class);
+
     @Override
     public void useDrugs(Patient patient) {
         final int days = patient.getDays();
@@ -29,5 +29,4 @@ public class Fever implements StateStrategy {
             LOG.info("[-] {} patient is still sick.", patient.getName());
         }
     }
-
 }

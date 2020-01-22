@@ -10,32 +10,29 @@ import org.junit.Test;
 import static com.hospital.entity.HealthCondition.DIABETES;
 import static org.junit.Assert.*;
 
+/**
+ * The responsibility of the Quarantine object is to simulate diseases on a group of patients.
+ * It is initialized with a list of patients' health status, separated by a comma.
+ * Each health status is described by one or more characters
+ * (in the test below, we will always have only one disease / patient)
+ * <p>
+ * The characters mean:
+ * H : Healthy
+ * F : Fever
+ * D : Diabetes
+ * T : Tuberculosis
+ * <p>
+ * Quarantine provides medicines to the patients, but can not target a specific group of patient.
+ * The same medicines are always given to all the patients.
+ * <p>
+ * Then Quarantine can provide a report with this format:
+ * "F:1 H:2 D:0 T:1 X:3"
+ * <p>
+ * Report give the number of patients that have the given disease.
+ * X means Dead
+ */
+
 public class QuarantineTest {
-
-
-    /**
-     *
-     *   The responsibility of the Quarantine object is to simulate diseases on a group of patients.
-     *   It is initialized with a list of patients' health status, separated by a comma.
-     *   Each health status is described by one or more characters
-     *   (in the test below, we will always have only one disease / patient)
-     *
-     *   The characters mean:
-     *   H : Healthy
-     *   F : Fever
-     *   D : Diabetes
-     *   T : Tuberculosis
-     *
-     *   Quarantine provides medicines to the patients, but can not target a specific group of patient.
-     *   The same medicines are always given to all the patients.
-     *
-     *   Then Quarantine can provide a report with this format:
-     *   "F:1 H:2 D:0 T:1 X:3"
-     *
-     *   Report give the number of patients that have the given disease.
-     *   X means Dead
-     *
-     */
 
     @Test
     public void withoutTreatmentNorTime() throws UnknownHealthConditionException {
@@ -107,28 +104,29 @@ public class QuarantineTest {
     }
 
     @Test
-    public void stateFactoryUnsupportedPatients()  {
-        Throwable exception = assertThrows(UnknownHealthConditionException.class, () -> StateFactory.getStrategy("Z,Z,X"));
-        assertEquals("Patient with unknown health condition is come.", exception.getMessage());
-    }
-
-
-    @Test
-    public void shouldShowErrorWhenComesIncorrectPatients()  {
-        Throwable exception = assertThrows(UnknownHealthConditionException.class, () -> new Quarantine("Z,H,D,D,D,H,T"));
+    public void stateFactoryUnsupportedPatients() {
+        Throwable exception = assertThrows(UnknownHealthConditionException.class,
+                () -> StateFactory.getStrategy("Z,Z,X"));
         assertEquals("Patient with unknown health condition is come.", exception.getMessage());
     }
 
     @Test
-    public void shouldShowErrorWhenComesDeadPatients()  {
-        Throwable exception = assertThrows(UnexpectedHealthCondition.class, () -> new Quarantine("X,H,D,D,D,H,T"));
+    public void shouldShowErrorWhenComesIncorrectPatients() {
+        Throwable exception = assertThrows(UnknownHealthConditionException.class,
+                () -> new Quarantine("Z,H,D"));
+        assertEquals("Patient with unknown health condition is come.", exception.getMessage());
+    }
+
+    @Test
+    public void shouldShowErrorWhenComesDeadPatients() {
+        Throwable exception = assertThrows(UnexpectedHealthCondition.class,
+                () -> new Quarantine("X,H,D"));
         assertEquals("New patient arrived already dead.", exception.getMessage());
     }
 
     @Test
-    public void nameShouldBeNotNullPointerException()  {
+    public void nameShouldBeNotNullPointerException() {
         Patient patient = new Patient(DIABETES);
         Assert.assertNotNull(patient.getName());
     }
-
 }

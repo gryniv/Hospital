@@ -32,9 +32,6 @@
                 <artifactId>pitest-maven</artifactId>
                 <version>1.4.9</version>
                 <configuration>
-                    <inScopeClasses>
-                        <param>com.hospital.*</param>
-                    </inScopeClasses>
                     <targetClasses>
                         <param>com.hospital.*</param>
                     </targetClasses>

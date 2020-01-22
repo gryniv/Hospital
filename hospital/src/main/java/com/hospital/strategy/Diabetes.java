@@ -1,6 +1,5 @@
 package com.hospital.strategy;
 
-
 import com.hospital.entity.Drug;
 import com.hospital.entity.Patient;
 import com.hospital.entity.HealthCondition;
@@ -15,7 +14,6 @@ import static com.hospital.entity.Drug.ASPIRIN;
 import static com.hospital.entity.Drug.PARACETAMOL;
 
 public class Diabetes implements StateStrategy {
-
     private static final Logger LOG = LogManager.getLogger(Diabetes.class);
 
     @Override

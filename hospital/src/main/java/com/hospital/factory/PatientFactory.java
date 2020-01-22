@@ -1,6 +1,5 @@
 package com.hospital.factory;
 
-
 import com.hospital.entity.Patient;
 import com.hospital.exception.UnexpectedHealthCondition;
 import com.hospital.exception.UnknownHealthConditionException;
@@ -10,9 +9,7 @@ import org.apache.logging.log4j.Logger;
 import static com.hospital.constant.QuarantineConstants.*;
 import static com.hospital.entity.HealthCondition.*;
 
-
 public class PatientFactory {
-
     private static final Logger LOG = LogManager.getLogger(PatientFactory.class);
 
     private PatientFactory() {
