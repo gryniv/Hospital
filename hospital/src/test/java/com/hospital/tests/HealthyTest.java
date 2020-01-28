@@ -2,12 +2,17 @@ package com.hospital.tests;
 
 import com.hospital.entity.Patient;
 import com.hospital.strategy.Healthy;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.hospital.entity.Drug.*;
-import static com.hospital.entity.HealthCondition.*;
+import static com.hospital.entity.Drug.PARACETAMOL;
+import static com.hospital.entity.Drug.ANTIBIOTIC;
+import static com.hospital.entity.Drug.INSULIN;
+import static com.hospital.entity.Drug.ASPIRIN;
+import static com.hospital.entity.HealthCondition.HEALTHY;
+import static com.hospital.entity.HealthCondition.FEVER;
+import static com.hospital.entity.HealthCondition.DIED;
+import static org.junit.Assert.assertEquals;
 
 public class HealthyTest {
     private Healthy healthy;
@@ -23,7 +28,7 @@ public class HealthyTest {
     public void healthyShouldBeStillHealthy() {
         healthyPatient.getDrugs().add(PARACETAMOL);
         healthy.useDrugs(healthyPatient);
-        Assert.assertEquals(healthyPatient.getHealthCondition(), HEALTHY);
+        assertEquals(healthyPatient.getHealthCondition(), HEALTHY);
     }
 
     @Test
@@ -32,7 +37,7 @@ public class HealthyTest {
         healthyPatient.getDrugs().add(INSULIN);
         healthyPatient.setDays(40);
         healthy.useDrugs(healthyPatient);
-        Assert.assertEquals(healthyPatient.getHealthCondition(), FEVER);
+        assertEquals(healthyPatient.getHealthCondition(), FEVER);
     }
 
     @Test
@@ -40,6 +45,6 @@ public class HealthyTest {
         healthyPatient.getDrugs().add(ASPIRIN);
         healthyPatient.getDrugs().add(PARACETAMOL);
         healthy.useDrugs(healthyPatient);
-        Assert.assertEquals(healthyPatient.getHealthCondition(), DIED);
+        assertEquals(healthyPatient.getHealthCondition(), DIED);
     }
 }

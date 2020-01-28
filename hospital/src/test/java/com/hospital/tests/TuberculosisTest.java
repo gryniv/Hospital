@@ -2,12 +2,16 @@ package com.hospital.tests;
 
 import com.hospital.entity.Patient;
 import com.hospital.strategy.Tuberculosis;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.hospital.entity.Drug.*;
-import static com.hospital.entity.HealthCondition.*;
+import static com.hospital.entity.Drug.PARACETAMOL;
+import static com.hospital.entity.Drug.ANTIBIOTIC;
+import static com.hospital.entity.Drug.ASPIRIN;
+import static com.hospital.entity.HealthCondition.TUBERCULOSIS;
+import static com.hospital.entity.HealthCondition.HEALTHY;
+import static com.hospital.entity.HealthCondition.DIED;
+import static org.junit.Assert.assertEquals;
 
 public class TuberculosisTest {
     private Tuberculosis tuberculosis;
@@ -23,7 +27,7 @@ public class TuberculosisTest {
     public void tuberculosisShouldBeStillSick() {
         tuberculosisPatient.getDrugs().add(PARACETAMOL);
         tuberculosis.useDrugs(tuberculosisPatient);
-        Assert.assertEquals(tuberculosisPatient.getHealthCondition(), TUBERCULOSIS);
+        assertEquals(tuberculosisPatient.getHealthCondition(), TUBERCULOSIS);
     }
 
     @Test
@@ -31,7 +35,7 @@ public class TuberculosisTest {
         tuberculosisPatient.getDrugs().add(ANTIBIOTIC);
         tuberculosisPatient.setDays(40);
         tuberculosis.useDrugs(tuberculosisPatient);
-        Assert.assertEquals(tuberculosisPatient.getHealthCondition(), HEALTHY);
+        assertEquals(tuberculosisPatient.getHealthCondition(), HEALTHY);
     }
 
     @Test
@@ -39,7 +43,7 @@ public class TuberculosisTest {
         tuberculosisPatient.getDrugs().add(ASPIRIN);
         tuberculosisPatient.getDrugs().add(PARACETAMOL);
         tuberculosis.useDrugs(tuberculosisPatient);
-        Assert.assertEquals(tuberculosisPatient.getHealthCondition(), DIED);
+        assertEquals(tuberculosisPatient.getHealthCondition(), DIED);
     }
 
 }

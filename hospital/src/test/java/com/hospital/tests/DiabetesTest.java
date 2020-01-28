@@ -2,7 +2,6 @@ package com.hospital.tests;
 
 import com.hospital.entity.Patient;
 import com.hospital.strategy.Diabetes;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,6 +9,7 @@ import static com.hospital.entity.Drug.ASPIRIN;
 import static com.hospital.entity.Drug.PARACETAMOL;
 import static com.hospital.entity.HealthCondition.DIABETES;
 import static com.hospital.entity.HealthCondition.DIED;
+import static org.junit.Assert.assertEquals;
 
 public class DiabetesTest {
     private Diabetes diabetes;
@@ -25,7 +25,7 @@ public class DiabetesTest {
     public void diabetesShouldBeStillSick() {
         diabetesPatient.getDrugs().add(ASPIRIN);
         diabetes.useDrugs(diabetesPatient);
-        Assert.assertEquals(diabetesPatient.getHealthCondition(), DIABETES);
+        assertEquals(diabetesPatient.getHealthCondition(), DIABETES);
     }
 
     @Test
@@ -33,7 +33,7 @@ public class DiabetesTest {
         diabetesPatient.getDrugs().add(ASPIRIN);
         diabetesPatient.setDays(40);
         diabetes.useDrugs(diabetesPatient);
-        Assert.assertEquals(diabetesPatient.getHealthCondition(), DIED);
+        assertEquals(diabetesPatient.getHealthCondition(), DIED);
     }
 
     @Test
@@ -41,6 +41,6 @@ public class DiabetesTest {
         diabetesPatient.getDrugs().add(ASPIRIN);
         diabetesPatient.getDrugs().add(PARACETAMOL);
         diabetes.useDrugs(diabetesPatient);
-        Assert.assertEquals(diabetesPatient.getHealthCondition(), DIED);
+        assertEquals(diabetesPatient.getHealthCondition(), DIED);
     }
 }
