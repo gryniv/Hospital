@@ -6,10 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static com.hospital.entity.Drug.ANTIBIOTIC;
-import static com.hospital.entity.Drug.PARACETAMOL;
-import static com.hospital.entity.HealthCondition.HEALTHY;
-import static com.hospital.entity.HealthCondition.TUBERCULOSIS;
+import static com.hospital.entity.Drug.*;
+import static com.hospital.entity.HealthCondition.*;
 
 public class TuberculosisTest {
     private Tuberculosis tuberculosis;
@@ -34,6 +32,14 @@ public class TuberculosisTest {
         tuberculosisPatient.setDays(40);
         tuberculosis.useDrugs(tuberculosisPatient);
         Assert.assertEquals(tuberculosisPatient.getHealthCondition(), HEALTHY);
+    }
+
+    @Test
+    public void tuberculosisTakeAspirinAndParacetamolShouldBeDied() {
+        tuberculosisPatient.getDrugs().add(ASPIRIN);
+        tuberculosisPatient.getDrugs().add(PARACETAMOL);
+        tuberculosis.useDrugs(tuberculosisPatient);
+        Assert.assertEquals(tuberculosisPatient.getHealthCondition(), DIED);
     }
 
 }

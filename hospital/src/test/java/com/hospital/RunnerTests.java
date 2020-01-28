@@ -12,7 +12,6 @@ import org.junit.runners.Suite;
         FeverTest.class,
         HealthyTest.class,
         TuberculosisTest.class,
-        AllPatientsTest.class,
         FactoryTest.class,
         ExceptionTest.class,
 })

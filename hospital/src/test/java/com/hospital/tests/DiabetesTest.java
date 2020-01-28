@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.hospital.entity.Drug.ASPIRIN;
+import static com.hospital.entity.Drug.PARACETAMOL;
 import static com.hospital.entity.HealthCondition.DIABETES;
 import static com.hospital.entity.HealthCondition.DIED;
 
@@ -31,6 +32,14 @@ public class DiabetesTest {
     public void diabetesShouldBeDied() {
         diabetesPatient.getDrugs().add(ASPIRIN);
         diabetesPatient.setDays(40);
+        diabetes.useDrugs(diabetesPatient);
+        Assert.assertEquals(diabetesPatient.getHealthCondition(), DIED);
+    }
+
+    @Test
+    public void diabetesTakeAspirinAndParacetamolShouldBeDied() {
+        diabetesPatient.getDrugs().add(ASPIRIN);
+        diabetesPatient.getDrugs().add(PARACETAMOL);
         diabetes.useDrugs(diabetesPatient);
         Assert.assertEquals(diabetesPatient.getHealthCondition(), DIED);
     }

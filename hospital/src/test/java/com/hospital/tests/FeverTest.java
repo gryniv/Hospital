@@ -6,9 +6,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static com.hospital.entity.Drug.ASPIRIN;
 import static com.hospital.entity.Drug.PARACETAMOL;
-import static com.hospital.entity.HealthCondition.FEVER;
-import static com.hospital.entity.HealthCondition.HEALTHY;
+import static com.hospital.entity.HealthCondition.*;
 
 public class FeverTest {
     private Fever fever;
@@ -35,4 +35,11 @@ public class FeverTest {
         Assert.assertEquals(feverPatient.getHealthCondition(), HEALTHY);
     }
 
+    @Test
+    public void feverTakeAspirinAndParacetamolShouldBeDied() {
+        feverPatient.getDrugs().add(ASPIRIN);
+        feverPatient.getDrugs().add(PARACETAMOL);
+        fever.useDrugs(feverPatient);
+        Assert.assertEquals(feverPatient.getHealthCondition(), DIED);
+    }
 }
